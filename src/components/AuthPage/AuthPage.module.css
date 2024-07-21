@@ -92,7 +92,7 @@ button:active {
 /* Styles for the error modal */
 .errorModal {
   position: fixed;
-  bottom: 10px; /* Adjusted to move the modal higher */
+  bottom: 20px; /* Adjusted to move the modal higher */
   left: 50%;
   transform: translateX(-50%);
   background: red; /* Red background for the modal */
@@ -101,7 +101,7 @@ button:active {
   border-radius: 5px;
   display: none; /* Hidden by default */
   z-index: 1000;
-  transition: opacity 0.3s ease-in-out, bottom 0.3s ease-in-out;
+  transition: opacity 0.5s ease-in-out, bottom 0.5s ease-in-out;
 }
 
 .errorModal.show {
@@ -112,4 +112,24 @@ button:active {
 .errorModal.hide {
   opacity: 0;
   bottom: 20px; /* Adjust to move the modal lower when hiding */
+}
+.inputWrapper {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 30px 10px 10px; /* Add padding to the left and right */
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #aaa;
 }

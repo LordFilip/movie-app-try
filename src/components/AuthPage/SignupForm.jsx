@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import styles from './AuthPage.module.css'
+import { useNavigate } from 'react-router-dom'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 const LoginForm = ({ formChanging }) => {
   const [inputs, setInputs] = useState({
@@ -9,7 +11,14 @@ const LoginForm = ({ formChanging }) => {
   })
   const [errors, setErrors] = useState({})
   const [showErrorModal, setShowErrorModal] = useState(false)
-  const [isFocused, setIsFocused] = useState(false) // New state to track focus
+  const [isFocused, setIsFocused] = useState(false)
+  const [passwordVisible, setPasswordVisible] = useState(false) // State to manage password visibility
+
+  const navigate = useNavigate()
+
+  const handleNavigate = () => {
+    navigate('/homepage')
+  }
 
   const handleChange = (e) => {
     setInputs({
@@ -22,18 +31,22 @@ const LoginForm = ({ formChanging }) => {
     const newErrors = {}
     const { email, password, confirmPassword } = inputs
 
-    // Email validation
+    if (!email || !password || !confirmPassword) {
+      newErrors.fields = 'All fields must be filled'
+      setErrors(newErrors)
+      setShowErrorModal(true)
+      return false
+    }
+
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailPattern.test(email)) {
       newErrors.email = 'Invalid email address'
     }
 
-    // Password validation
     if (password.length < 8) {
       newErrors.password = 'Password must be at least 8 characters'
     }
 
-    // Confirm password validation
     if (password !== confirmPassword) {
       newErrors.confirmPassword = 'Passwords do not match'
     }
@@ -45,26 +58,28 @@ const LoginForm = ({ formChanging }) => {
     }
 
     setErrors({})
+    setShowErrorModal(false)
     return true
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     if (validateInputs()) {
-      // Handle successful validation
-      console.log('Form submitted successfully')
+      handleNavigate()
     }
   }
 
   const handleFocus = () => {
-    setIsFocused(true) // Set focus state to true
-    if (showErrorModal) {
-      setShowErrorModal(false)
-    }
+    setErrors({})
+    setShowErrorModal(false)
   }
 
   const handleBlur = () => {
-    setIsFocused(false) // Set focus state to false
+    setIsFocused(false)
+  }
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible)
   }
 
   return (
@@ -78,14 +93,17 @@ const LoginForm = ({ formChanging }) => {
             Your email:
           </label>
           <input
-            type="email"
+            type="text"
             name="email"
             value={inputs.email}
             onChange={handleChange}
-            onFocus={handleFocus}
             onBlur={handleBlur}
+            onFocus={handleFocus}
             className={`${styles.input} ${
-              (errors.email || errors.password || errors.confirmPassword) &&
+              (errors.email ||
+                errors.password ||
+                errors.confirmPassword ||
+                errors.fields) &&
               !isFocused
                 ? styles.errorInput
                 : styles.normalInput
@@ -96,39 +114,52 @@ const LoginForm = ({ formChanging }) => {
           <label htmlFor="password" className={styles.label}>
             Your password:
           </label>
-          <input
-            type="password"
-            name="password"
-            value={inputs.password}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            className={`${styles.input} ${
-              (errors.email || errors.password || errors.confirmPassword) &&
-              !isFocused
-                ? styles.errorInput
-                : styles.normalInput
-            }`}
-          />
+          <div className={styles.inputWrapper}>
+            <input
+              type={passwordVisible ? 'text' : 'password'}
+              name="password"
+              value={inputs.password}
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              className={`${styles.input} ${
+                (errors.email ||
+                  errors.password ||
+                  errors.confirmPassword ||
+                  errors.fields) &&
+                !isFocused
+                  ? styles.errorInput
+                  : styles.normalInput
+              }`}
+            />
+            <div className={styles.icon} onClick={togglePasswordVisibility}>
+              {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+            </div>
+          </div>
         </div>
         <div className={styles.row}>
           <label htmlFor="confirmPassword" className={styles.label}>
             Confirm password:
           </label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={inputs.confirmPassword}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            className={`${styles.input} ${
-              (errors.email || errors.password || errors.confirmPassword) &&
-              !isFocused
-                ? styles.errorInput
-                : styles.normalInput
-            }`}
-          />
+          <div className={styles.inputWrapper}>
+            <input
+              type={passwordVisible ? 'text' : 'password'}
+              name="confirmPassword"
+              value={inputs.confirmPassword}
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              className={`${styles.input} ${
+                (errors.email ||
+                  errors.password ||
+                  errors.confirmPassword ||
+                  errors.fields) &&
+                !isFocused
+                  ? styles.errorInput
+                  : styles.normalInput
+              }`}
+            />
+          </div>
         </div>
         <div className={styles.row}>
           <p>
