@@ -1,0 +1,72 @@
+.searchContainer {
+  position: fixed; /* Fixes the container to the left side of the viewport */
+  top: 10vh;
+  left: 0;
+  width: 50vw; /* Occupies 50% of the viewport width */
+  height: 90vh; /* Occupies 100% of the viewport height */
+  background-color: #f0f0f0; /* Light background color for better visibility */
+  overflow: hidden; /* Hide scrollbar but allows scrolling */
+  padding: 20px; /* Adds padding inside the container */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.searchInput {
+  width: 100%; /* Makes the input field take up the full width */
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc; /* Light border for the input field */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.movieList {
+  list-style-type: none; /* Removes bullet points */
+  padding: 0;
+  margin: 0;
+  overflow-y: auto; /* Enables vertical scrolling */
+  flex: 1; /* Allows movieList to grow and take available space */
+}
+
+.movieItem {
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff; /* White background for items */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.movieItem:hover {
+  background-color: #e0e0e0; /* Changes background color on hover */
+}
+
+.navbar {
+  background-color: #333;
+  padding: 1rem;
+  color: #fff;
+}
+
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.navbar li {
+  margin-right: 1rem;
+  display: inline;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}

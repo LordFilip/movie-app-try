@@ -1,0 +1,45 @@
+.container {
+  display: flex; /* Enables flexbox layout */
+  height: 90vh; /* Full viewport height */
+  margin-top: 10vh;
+}
+
+.searchContainer {
+  width: 50vw; /* 50% of viewport width */
+  padding: 20px; /* Adds padding inside the container */
+  background-color: #f0f0f0; /* Light background color for better visibility */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow on the right side */
+  overflow-y: auto; /* Allows scrolling if content overflows */
+}
+
+.movieCardContainer {
+  flex: 1; /* Takes up the remaining space */
+  padding: 20px; /* Adds padding inside the container */
+  background-color: #fff; /* White background for the movie card container */
+}
+
+.searchInput {
+  width: 100%; /* Makes the input field take up the full width */
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc; /* Light border for the input field */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.movieList {
+  list-style-type: none; /* Removes bullet points */
+  padding: 0;
+}
+
+.movieItem {
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff; /* White background for items */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.movieItem:hover {
+  background-color: #e0e0e0; /* Changes background color on hover */
+}
